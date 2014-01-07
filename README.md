@@ -1,4 +1,4 @@
-# GitHub Buttons
+# GitHub Buttons Gem
 A little wrapper for Mark Ottos [GitHub Buttons](https://github.com/mdo/github-buttons) to print `<iframe>` elements for your views on any open source project pushed to GitHub.
 
 ## Installation
