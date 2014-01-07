@@ -1,10 +1,10 @@
 # GitHub Buttons
 A little wrapper for Mark Ottos [GitHub Buttons](https://github.com/mdo/github-buttons) to print `<iframe>` elements for your views on any open source project pushed to GitHub.
 
-# Installation
+## Installation
 Run `gem install github-buttons` to install the Gem locally or add it to the Gemfile of any project using Bundler and `bundle install`.
 
-# Usage
+## Usage
 In this example we'll create three buttons that point to this repository: "fork", "star" and "follow". The templating language here is [ERB](http://ruby-doc.org/stdlib-2.1.0/libdoc/erb/rdoc/ERB.html), though, you're welcome to use your favorite. The `GitHub::Button` class takes two strings: user name and repository name. Calling the `#style` method on that instance will allow you to print one of the three button styles with two optional parameters passed in an options hash:
 - `count: true` (displays the total number of followers, stargazers or forks)
 - `large: true` (increases the button size)
@@ -14,37 +14,37 @@ Note: the default values for size and style are "small" and "fork". No configura
 The first line creates a new instance of the GitHub::Button class with the user name `mmwtsn` and repository `github-buttons`. Each additional line will print a different button. For illustrative purposes all possibile combinations are shown below.
 
 ```ruby
-    <% b = GitHub::Button.new('mmwtsn', 'github-buttons') %>
+<% b = GitHub::Button.new('mmwtsn', 'github-buttons') %>
 
-    <%= b.style('fork') %>
-    <%= b.style('star') %>
-    <%= b.style('follow') %>
+<%= b.style('fork') %>
+<%= b.style('star') %>
+<%= b.style('follow') %>
 
-    <%= b.style('fork', count: true) %>
-    <%= b.style('star', count: true) %>
-    <%= b.style('follow', count: true) %>
+<%= b.style('fork', count: true) %>
+<%= b.style('star', count: true) %>
+<%= b.style('follow', count: true) %>
 
-    <%= b.style('fork', large: true) %>
-    <%= b.style('star', large: true) %>
-    <%= b.style('follow', large: true) %>
+<%= b.style('fork', large: true) %>
+<%= b.style('star', large: true) %>
+<%= b.style('follow', large: true) %>
 
-    <%= b.style('fork', count: true, large: true) %>
-    <%= b.style('star', count: true, large: true) %>
-    <%= b.style('follow', count: true, large: true) %>
+<%= b.style('fork', count: true, large: true) %>
+<%= b.style('star', count: true, large: true) %>
+<%= b.style('follow', count: true, large: true) %>
 ```
 
 Additionally, a set of quick helper methods could be written to clean up your views.
 ```ruby
-  # Create a view helper method
-  def new_button
-    # Create a new button
-    b = GitHub::Button.new('mmwtsn', 'github-buttons')
-    # Pass the button some default styles
-    b.style(count: true)
-  end
+# Create a view helper method
+ def new_button
+   # Create a new button
+   b = GitHub::Button.new('mmwtsn', 'github-buttons')
+   # Pass the button some default styles
+   b.style('star', count: true)
+ end
 ```
 
-# Known Issues
+## Known Issues
 At the time of release, Firefox on OS X was unable to render the "small" (default) button size and, regardless of configuration, strips the first button on the page of its label and count. This appears to be a problem stemming from the original [GitHub Button](https://github.com/mdo/github-buttons) source code.
 
 ## Author
