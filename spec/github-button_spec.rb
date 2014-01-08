@@ -60,30 +60,19 @@ describe GitHub::Button do
       b.match(/size=large.*count=true/).should be_true
     end
 
-=begin
-      Star Button
-      width="62" height="20"
-
-      Fork Button
-      width="53" height="20"
-
-      Follow Button
-      width="132" height="20"
-=end
-
-    it 'returns the correct "star" button dimensions' do
+    it 'returns the correct "small star" button dimensions' do
       b = @button.style('star')
       b.match(%r(width="62")).should be_true
       b.match(%r(height="20")).should be_true
     end
 
-    it 'returns the correct "fork" button dimensions' do
+    it 'returns the correct "small fork" button dimensions' do
       b = @button.style('fork')
       b.match(%r(width="53")).should be_true
       b.match(%r(height="20")).should be_true
     end
 
-    it 'returns the correct "follow" button dimensions' do
+    it 'returns the correct "small follow" button dimensions' do
       b = @button.style('follow')
       b.match(%r(width="132")).should be_true
       b.match(%r(height="20")).should be_true
