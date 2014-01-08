@@ -28,7 +28,7 @@ describe GitHub::Button do
     end
 
     it 'returns the correct string' do
-      @button.style.should eql %Q(<iframe class="github-button follow" src="http://ghbtns.com/github-btn.html?user=a-user&repo=a-repository&type=follow" allowtransparency="true" frameborder="0" scrolling="0" width="132" height="20"></iframe>)
+      @button.style.should eql %Q(<iframe class="github-button follow" src="http://ghbtns.com/github-btn.html?user=a-user&repo=a-repository&type=follow" allowtransparency="true" frameborder="0" scrolling="0" width="120" height="30"></iframe>)
     end
 
     it 'contains the user name' do
@@ -75,25 +75,6 @@ describe GitHub::Button do
     it 'accepts a hash of options for size and count' do
       b = @button.style('star', large: true, count: true)
       b.match(/size=large.*count=true/).should be_true
-    end
-
-    # Tests button dimensions
-    it 'returns the correct "small star" button dimensions' do
-      b = @button.style('star')
-      b.match(%r(width="62")).should be_true
-      b.match(%r(height="20")).should be_true
-    end
-
-    it 'returns the correct "small fork" button dimensions' do
-      b = @button.style('fork')
-      b.match(%r(width="53")).should be_true
-      b.match(%r(height="20")).should be_true
-    end
-
-    it 'returns the correct "small follow" button dimensions' do
-      b = @button.style('follow')
-      b.match(%r(width="132")).should be_true
-      b.match(%r(height="20")).should be_true
     end
   end
 end
