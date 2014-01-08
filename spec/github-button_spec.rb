@@ -45,10 +45,11 @@ describe GitHub::Button do
     # This is a bug in GitHub Buttons
     # Requesting "watch" returns "star"
     # See: https://github.com/mdo/github-buttons/issues/42#issuecomment-19951052
-    it 'accepts "star" and does not return "star", "follow" or "fork"' do
+    it 'accepts "star" and returns "watch" and "star" but not "follow" or "fork"' do
       b = @button.style('star')
+      b.match(%r(star)).should be_true
       b.match(%r(watch)).should be_true
-      b.match(/star.*follow.*fork/).should be_false
+      b.match(/follow.*fork/).should be_false
     end
 
     it 'accepts "fork" and does not return "star", "watch" or  "follow"' do
