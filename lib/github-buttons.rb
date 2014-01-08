@@ -35,17 +35,6 @@ module GitHub
         width, height = 132, 20
       end
 
-=begin
-      Star Button
-      width="62" height="20"
-
-      Fork Button
-      width="53" height="20"
-
-      Follow Button
-      width="132" height="20"
-=end
-
       # Format options as URL query parameters for final iFrame
       if options[:large] then size = "&size=large" end
       if options[:count] then count = "&count=true" end

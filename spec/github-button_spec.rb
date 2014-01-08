@@ -1,10 +1,14 @@
 require_relative '../lib/github-buttons.rb'
 
 describe GitHub::Button do
+  # Instantiate a new mock button before every test is run
   before(:all) do
     @button = GitHub::Button.new('a-user', 'a-repository')
   end
 
+  # #
+  # Does the Button class initialize as expected?
+  #
   describe '#initialize' do
     it 'gets the user name' do
       @button.user.should eql 'a-user'
@@ -15,6 +19,9 @@ describe GitHub::Button do
     end
   end
 
+  # #
+  # Tests the method that builds and returns the button
+  #
   describe '#style' do
     it 'returns a correct string' do
       @button.style.class.should eql String
@@ -32,19 +39,28 @@ describe GitHub::Button do
       @button.style.match(%r(a-repository)).should be_true
     end
 
+    # #
+    # Only accept three button styles supported by @mdo's API
+    #
     # This is a bug in GitHub Buttons
     # Requesting "watch" returns "star"
     # See: https://github.com/mdo/github-buttons/issues/42#issuecomment-19951052
-    it 'accepts "star"' do
-      @button.style('star').match(%r(watch)).should be_true
+    it 'accepts "star" and does not return "star", "follow" or "fork"' do
+      b = @button.style('star')
+      b.match(%r(watch)).should be_true
+      b.match(/star.*follow.*fork/).should be_false
     end
 
-    it 'accepts "fork"' do
-      @button.style('fork').match(%r(fork)).should be_true
+    it 'accepts "fork" and does not return "star", "watch" or  "follow"' do
+      b = @button.style('fork')
+      b.match(%r(fork)).should be_true
+      b.match(/star.*watch.*follow/).should be_false
     end
 
-    it 'accepts "follow"' do
-      @button.style('follow').match(%r(follow)).should be_true
+    it 'accepts "follow" and does not return "star", "watch" or "fork"' do
+      b = @button.style('follow')
+      b.match(%r(follow)).should be_true
+      b.match(/star.*watch.*fork/).should be_false
     end
 
     it 'does not accept an Integer' do
@@ -55,11 +71,13 @@ describe GitHub::Button do
       expect{@button.style('bananas')}.to raise_error(ArgumentError)
     end
 
+    # Tests optional configuration hash
     it 'accepts a hash of options for size and count' do
       b = @button.style('star', large: true, count: true)
       b.match(/size=large.*count=true/).should be_true
     end
 
+    # Tests button dimensions
     it 'returns the correct "small star" button dimensions' do
       b = @button.style('star')
       b.match(%r(width="62")).should be_true
