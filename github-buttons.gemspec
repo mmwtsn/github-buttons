@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'github-buttons'
-  s.version     = '0.1.0'
+  s.version     = '0.1.1'
   s.date        = '2014-01-07'
   s.summary     = "GitHub Buttons Wrapper"
   s.description = "A little wrapper for Mark Ottos GitHub Buttons to print <iframe> elements for your views"
