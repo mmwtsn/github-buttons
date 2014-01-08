@@ -9,7 +9,12 @@ In this example we'll create three buttons that point to this repository: "fork"
 - `count: true` (displays the total number of followers, stargazers or forks)
 - `large: true` (increases the button size)
 
-Note: the default values for size and style are "small" and "fork". No configuration options are needed to create a small-sized button.
+The default values for size and style are "small" and "fork". No configuration options are needed to create a small-sized button.
+
+### A Note About Dimensions
+Setting fixed sizes for these buttons can cause overflow issues for buttons including "count" if the width is smaller than the button. This scenario can occur if a fixed pixel width is set. For example, if you were to set the width of a "star" button with count to the exact dimensions of its current size that button would not render properly should the count grow one decimal place further.
+
+For this reason the width has deliberately been set generously. Feel free to tweak this manually using the included HTML classes of `star`, `fork` and `follow`. If an additional specificity is required each button also has a generic `github-button` class.
 
 The first line creates a new instance of the GitHub::Button class with the user name `mmwtsn` and repository `github-buttons`. Each additional line will print a different button. For illustrative purposes all possibile combinations are shown below.
 
