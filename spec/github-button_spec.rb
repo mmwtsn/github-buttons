@@ -21,7 +21,7 @@ describe GitHub::Button do
     end
 
     it 'returns the correct string' do
-      @button.style.should eql %Q(<iframe src="http://ghbtns.com/github-btn.html?user=a-user&repo=a-repository&type=follow" allowtransparency="true" frameborder="0" scrolling="0" width="250" height="30"></iframe>)
+      @button.style.should eql %Q(<iframe src="http://ghbtns.com/github-btn.html?user=a-user&repo=a-repository&type=follow" allowtransparency="true" frameborder="0" scrolling="0" width="132" height="20"></iframe>)
     end
 
     it 'contains the user name' do
@@ -52,13 +52,29 @@ describe GitHub::Button do
     end
 
     it 'does not accept a non-standard String' do
-      b = GitHub::Button.new('mmwtsn', 'hipchat-emotodex')
       expect{@button.style('bananas')}.to raise_error(ArgumentError)
     end
 
     it 'accepts a hash of options for size and count' do
       b = @button.style('star', large: true, count: true)
       b.match(/size=large.*count=true/).should be_true
+    end
+
+=begin
+      Star Button
+      width="62" height="20"
+
+      Fork Button
+      width="53" height="20"
+
+      Follow Button
+      width="132" height="20"
+=end
+
+    it 'returns the correct "star" button dimensions' do
+      b = @button.style('star')
+      b.match(%r(width="62")).should be_true
+      b.match(%r(height="20")).should be_true
     end
   end
 end

@@ -10,10 +10,45 @@ module GitHub
       # Available GitHub Button types
       types = ['fork', 'star', 'follow']
 
+      # Ensure argument type is valid
+      unless type.is_a? String
+        raise ArgumentError, "Expected String, got #{type.class}"
+      end
+
       # Ensure button type exists
       unless types.include? type
         raise ArgumentError, %Q(#{type} button not available. Try "fork", "star" or "follow")
       end
+
+      # If no options are specified, pass none
+      if options.empty?
+        large = count = nil
+      end
+
+      # Pass dimensions to iFrame based on requested style
+      case type
+      when 'star'
+        width, height = 62, 20
+      when 'fork'
+        width, height = 53, 20
+      when 'follow'
+        width, height = 132, 20
+      end
+
+=begin
+      Star Button
+      width="62" height="20"
+
+      Fork Button
+      width="53" height="20"
+
+      Follow Button
+      width="132" height="20"
+=end
+
+      # Format options as URL query parameters for final iFrame
+      if options[:large] then size = "&size=large" end
+      if options[:count] then count = "&count=true" end
 
       # Work around bug in GitHub Button repository
       # Requesting "watch" actually returns "star"
@@ -22,22 +57,8 @@ module GitHub
         type = 'watch'
       end
 
-      # Ensure argument type is valid
-      unless type.is_a? String
-        raise ArgumentError, "Expected String, got #{type.class}"
-      end
-
-      # If no options are specified, pass none
-      if options.empty?
-        large = count = nil
-      end
-
-      # Format options as URL query parameters for final iFrame
-      if options[:large] then size = "&size=large" end
-      if options[:count] then count = "&count=true" end
-
       # Return GitHub Button
-      %Q(<iframe src="http://ghbtns.com/github-btn.html?user=#{@user}&repo=#{@repo}&type=#{type}#{size}#{count}" allowtransparency="true" frameborder="0" scrolling="0" width="250" height="30"></iframe>)
+      %Q(<iframe src="http://ghbtns.com/github-btn.html?user=#{@user}&repo=#{@repo}&type=#{type}#{size}#{count}" allowtransparency="true" frameborder="0" scrolling="0" width="#{width}" height="#{height}"></iframe>)
     end
   end
 end
