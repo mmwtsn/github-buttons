@@ -28,7 +28,7 @@ describe GitHub::Button do
     end
 
     it 'returns the correct string' do
-      @button.style.should eql %Q(<iframe src="http://ghbtns.com/github-btn.html?user=a-user&repo=a-repository&type=follow" allowtransparency="true" frameborder="0" scrolling="0" width="132" height="20"></iframe>)
+      @button.style.should eql %Q(<iframe class="github-button follow" src="http://ghbtns.com/github-btn.html?user=a-user&repo=a-repository&type=follow" allowtransparency="true" frameborder="0" scrolling="0" width="132" height="20"></iframe>)
     end
 
     it 'contains the user name' do

@@ -47,7 +47,7 @@ module GitHub
       end
 
       # Return GitHub Button
-      %Q(<iframe src="http://ghbtns.com/github-btn.html?user=#{@user}&repo=#{@repo}&type=#{type}#{size}#{count}" allowtransparency="true" frameborder="0" scrolling="0" width="#{width}" height="#{height}"></iframe>)
+      %Q(<iframe class="github-button #{type}" src="http://ghbtns.com/github-btn.html?user=#{@user}&repo=#{@repo}&type=#{type}#{size}#{count}" allowtransparency="true" frameborder="0" scrolling="0" width="#{width}" height="#{height}"></iframe>)
     end
   end
 end
